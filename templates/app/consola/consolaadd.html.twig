@@ -1,0 +1,37 @@
+{% extends 'app/index.html.twig' %}
+{% block content %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="text-center mb-4">Consola</h1>
+
+                <form method="post" class="form">
+                    {{ form_errors(consolaForm) }}
+                    {{ form_start(consolaForm) }}
+                    <div class="form-group">
+                        {{ form_row(consolaForm.marca, {'attr': {'class': 'form-control', 'placeholder': 'Marca'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(consolaForm.modelo, {'attr': {'class': 'form-control', 'placeholder': 'Modelo'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(consolaForm.precio, {'attr': {'class': 'form-control', 'placeholder': 'Precio'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(consolaForm.foto, {'attr': {'class': 'form-control', 'placeholder': 'Foto'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(consolaForm.stock, {'attr': {'class': 'form-control', 'placeholder': 'Stock'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(consolaForm.info, {'attr': {'class': 'form-control', 'placeholder': 'Info'}}) }}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Añadir</button>
+                    {{ form_end(consolaForm) }}
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+{% endblock %}

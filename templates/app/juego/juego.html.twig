@@ -1,0 +1,59 @@
+{% extends 'app/index.html.twig' %}
+{% block content %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <div class="row mb-4 text-center">
+        <div class="col-2 themed-grid-col">ID_Juego</div>
+        <div class="col-1 themed-grid-col">Nombre</div>
+        <div class="col-2 themed-grid-col">Desarrollador</div>
+        <div class="col-1 themed-grid-col">Genero</div>
+        <div class="col-1 themed-grid-col">Precio</div>
+        <div class="col-1 themed-grid-col">Foto</div>
+        <div class="col-1 themed-grid-col">Stock</div>
+        <div class="col-1 themed-grid-col">Info</div>
+        <div class="col-1 themed-grid-col">Editar</div>
+        <div class="col-1 themed-grid-col">Eliminar</div>
+    </div>
+    {% for juego in juegos %}
+        <div class="row mb-6 text-center">
+            <div class="col-2 themed-grid-col">{{ juego.idJuego }}</div>
+            <div class="col-1 themed-grid-col">{{ juego.nombre }}</div>
+            <div class="col-2 themed-grid-col">{{ juego.desarrollador}}</div>
+            <div class="col-1 themed-grid-col">{{ juego.genero}}</div>
+            <div class="col-1 themed-grid-col">{{ juego.precio}}</div>
+            <div class="col-1 themed-grid-col">sdfsfd</div>
+            <div class="col-1 themed-grid-col">{{ juego.stock}}</div>
+            <div class="col-1 themed-grid-col">{{ juego.info}}</div>
+            <div class="col-1 themed-grid-col"><button>Editar</button></div>
+            <div class="col-1 themed-grid-col">
+                <button class="deleteButton" data-juego-id="{{ juego.idJuego }}">Eliminar</button>
+            </div>
+
+        </div>
+    {% endfor %}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.deleteButton').click(function() {
+                var juegoId = $(this).data('juego-id');
+
+                $.ajax({
+                    url: '/app/juego/delete/' + juegoId,
+                    method: 'DELETE',
+                    success: function(response) {
+                        // Manejar la respuesta si es necesario
+                        console.log('Juego eliminado');
+                        location.reload();
+                    },
+                    error: function(err) {
+                        // Manejar el error si ocurre alguno
+                        console.error('Error al eliminar el juego', err);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+{% endblock %}

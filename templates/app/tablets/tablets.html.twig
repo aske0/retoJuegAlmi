@@ -1,0 +1,52 @@
+{% extends 'app/index.html.twig' %}
+{% block content %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <div class="row mb-4 text-center">
+        <div class="col-2 themed-grid-col">ID_Tablet</div>
+        <div class="col-2 themed-grid-col">Marca</div>
+        <div class="col-1 themed-grid-col">Modelo</div>
+        <div class="col-2 themed-grid-col">Precio</div>
+        <div class="col-2 themed-grid-col">Foto</div>
+        <div class="col-1 themed-grid-col">Stock</div>
+        <div class="col-1 themed-grid-col">Editar</div>
+        <div class="col-1 themed-grid-col">Eliminar</div>
+    </div>
+    {% for tablet in tablets %}
+        <div class="row mb-6 text-center">
+            <div class="col-2 themed-grid-col">{{ tablet.idTablets }}</div>
+            <div class="col-2 themed-grid-col">{{ tablet.nombre }}</div>
+            <div class="col-1 themed-grid-col">{{ tablet.modelo}}</div>
+            <div class="col-2 themed-grid-col">{{ tablet.precio}}</div>
+            <div class="col-2 themed-grid-col">asdfafe</div>
+            <div class="col-1 themed-grid-col">{{ tablet.stock}}</div>
+            <div class="col-1 themed-grid-col"><button>Editar</button></div>
+            <div class="col-1 themed-grid-col">
+                <button class="deleteButton" data-tablet-id="{{ tablet.idTablets }}">Eliminar</button>
+            </div>
+        </div>
+    {% endfor %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.deleteButton').click(function() {
+                var idTablets = $(this).data('tablet-id');
+
+                $.ajax({
+                    url: '/app/tablets/delete/' + idTablets,
+                    method: 'DELETE',
+                    success: function(response) {
+                        // Manejar la respuesta si es necesario
+                        console.log('Tablet eliminada');
+                        location.reload();
+                    },
+                    error: function(err) {
+                        // Manejar el error si ocurre alguno
+                        console.error('Error al eliminar la tablet', err);
+                    }
+                });
+            });
+        });
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+{% endblock %}
